@@ -9,7 +9,7 @@ using namespace std;
 
 void help()
 {
-	cout << "mouse move control version 1.0.0 / 2019-03-04" << endl;
+	cout << "mouse move control version 1.0.1 / 2019-03-05" << endl;
 	cout << "Usage:" << endl;
 	cout << "  mouse move x y" << endl;
 	cout << "  mouse click x y" << endl;
@@ -20,6 +20,7 @@ void help()
 
 int main(int argc, char *argv[])
 {
+	POINT p;
 	int x,y;
 	if(argc == 4)
 	{
@@ -32,15 +33,18 @@ int main(int argc, char *argv[])
 		}
 		else if(strcmp("click",argv[1]) == 0)
 		{
+			GetCursorPos(&p);
 			x = atoi(argv[2]);
 			y = atoi(argv[3]);
 			SetCursorPos(x,y);
 			mouse_event(MOUSEEVENTF_LEFTDOWN,x,y,0,0);
 			mouse_event(MOUSEEVENTF_LEFTUP,x,y,0,0);
+			SetCursorPos(p.x,p.y);
 			return 0;
 		}
 		else if(strcmp("dbclick",argv[1]) == 0)
 		{
+			GetCursorPos(&p);
 			x = atoi(argv[2]);
 			y = atoi(argv[3]);
 			SetCursorPos(x,y);
@@ -48,15 +52,18 @@ int main(int argc, char *argv[])
 			mouse_event(MOUSEEVENTF_LEFTUP,x,y,0,0);
 			mouse_event(MOUSEEVENTF_LEFTDOWN,x,y,0,0);
 			mouse_event(MOUSEEVENTF_LEFTUP,x,y,0,0);
+			SetCursorPos(p.x,p.y);
 			return 0;
 		}
 		else if(strcmp("rgtclick",argv[1]) == 0)
 		{
+			GetCursorPos(&p);
 			x = atoi(argv[2]);
 			y = atoi(argv[3]);
 			SetCursorPos(x,y);
 			mouse_event(MOUSEEVENTF_RIGHTDOWN,x,y,0,0);
 			mouse_event(MOUSEEVENTF_RIGHTUP,x,y,0,0);
+			SetCursorPos(p.x,p.y);
 			return 0;
 		}
 	} 
